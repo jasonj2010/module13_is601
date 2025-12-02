@@ -75,26 +75,16 @@ class User(Base):
     def verify_password(self, plain_password: str) -> bool:
         """
         Verify a plain-text password against this user's stored hashed password.
-        
-        Args:
-            plain_password: The plain-text password to verify
-            
-        Returns:
-            bool: True if password matches, False otherwise
         """
         from app.auth.jwt import verify_password
         return verify_password(plain_password, self.password)
+
 
     @classmethod
     def hash_password(cls, password: str) -> str:
         """
         Hash a plain-text password using the application's password hashing utility.
         
-        Args:
-            password: The plain-text password to hash
-            
-        Returns:
-            str: The hashed password
         """
         from app.auth.jwt import get_password_hash
         return get_password_hash(password)
